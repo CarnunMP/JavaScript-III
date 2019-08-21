@@ -116,6 +116,59 @@ Baby.prototype.play = function() {
   With amazing and original capabilities. Build 3 small ones, or a very
   complicated one with lots of state. Surprise us!
 */
+function Enemy(id, positionXY, hitboxXY, hp, speed, strength) {
+  this.id = id;
+  this.positionXY = positionXY;
+  this.hitboxXY = hitboxXY;
+  this.hp = hp;
+  this.speed = speed;
+  this.strength = strength;
+
+  this.type;
+}
+Enemy.prototype.takeDamage = function(amount) {
+  this.hp -= amount;
+  this.isDead(); // This evaluation is just getting thrown away, at present... but you can see where it might come in handy!
+}
+Enemy.prototype.isDead = function() {
+  if (hp <= 0) {
+    console.log(`${this} is dead`);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function Slime(id, positionXY, hitboxXY = [10, 10], hp = 5, speed = 1, strength = 1, type = "basic") {
+  Enemy.call(this, id, positionXY, hitboxXY, hp, speed, strength);
+
+  this.type = type;
+}
+Slime.prototype = Object.create(Enemy.prototype);
+Slime.prototype.jump = function(unitDirectionXY) {
+  this.positionXY[0] += (unitDirectionXY[0] * this.speed);
+  this.positionXY[1] += (unitDirectionXY[1] * this.speed);
+
+  if (this.type === "leaky") { 
+    this.hp -= 1;
+  }
+}
+
+function BombBeetle(id, positionXY, hitboxXY, hp = 7, speed = 1, strength = 2) {
+  Enemy.call(this, id, positionXY, hitboxXY, hp, speed, strength);
+}
+BombBeetle.prototype = Object.create(Enemy.prototype);
+
+
+// Some tests for Task 4 (also used console):
+var slime1 = new Slime(1, [100, 100]); // Q: Any way around ordering these args like the parent orders them?
+console.log(slime1);
+
+var slime2 = new Slime(2, [120, 150], undefined, undefined, undefined, undefined, "leaky");
+console.log(slime2);
+
+var bombBeetle1 = new BombBeetle(3, [150, 150], [15, 10]);
+console.log(bombBeetle1);
 
 /*
 
