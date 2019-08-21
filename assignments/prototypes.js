@@ -131,8 +131,8 @@ Enemy.prototype.takeDamage = function(amount) {
   this.isDead(); // This evaluation is just getting thrown away, at present... but you can see where it might come in handy!
 }
 Enemy.prototype.isDead = function() {
-  if (hp <= 0) {
-    console.log(`${this} is dead`);
+  if (this.hp <= 0) {
+    console.log(`Enemy #${this.id} is dead`);
     return true;
   } else {
     return false;
@@ -154,10 +154,28 @@ Slime.prototype.jump = function(unitDirectionXY) {
   }
 }
 
-function BombBeetle(id, positionXY, hitboxXY, hp = 7, speed = 1, strength = 2) {
+function BombBeetle(id, positionXY, hitboxXY, hp = 7, speed = 1, strength = 2, type = "basic", range = 25) {
   Enemy.call(this, id, positionXY, hitboxXY, hp, speed, strength);
+  
+  this.type = type;
+  this.range = range;
 }
 BombBeetle.prototype = Object.create(Enemy.prototype);
+BombBeetle.prototype.spit = function(unitDirectionXY) {
+  if (playerIsInRange(this.positionXY, playerPosition, this.range)) {
+    console.log(`Enemy ${this.id} has spit a projectile in the direction of [${unitDirectionXY}]!`);
+  } else {
+    console.log(`Enemy ${this.id} is too far away from the player to spit!`);
+  }
+}
+let playerPosition = [100, 100]; // Hardcoding for now.
+let playerIsInRange = function(mobPositionXY, playerPositionXY, range) {
+  let xDiff = Math.abs(mobPositionXY[0] - playerPositionXY[0]);
+  let yDiff = Math.abs(mobPositionXY[1] - playerPositionXY[1]);
+  
+  console.log(Math.sqrt( (xDiff * xDiff) + (yDiff * yDiff)));
+  return Math.sqrt( (xDiff * xDiff) + (yDiff * yDiff) ) <= range;
+}
 
 
 // Some tests for Task 4 (also used console):
@@ -167,7 +185,7 @@ console.log(slime1);
 var slime2 = new Slime(2, [120, 150], undefined, undefined, undefined, undefined, "leaky");
 console.log(slime2);
 
-var bombBeetle1 = new BombBeetle(3, [150, 150], [15, 10]);
+var bombBeetle1 = new BombBeetle(3, [110, 110], [15, 10]);
 console.log(bombBeetle1);
 
 /*
