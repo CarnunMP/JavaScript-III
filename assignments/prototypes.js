@@ -36,7 +36,6 @@
 */
 
 /*
-
   TASK 1
 
   - Build a Person Constructor that takes name and age.
@@ -45,7 +44,26 @@
   - When eating an edible, it should be pushed into a "stomach" property which is an array.
   - Give persons the ability to poop.
   - When pooping, the stomach should empty.
+*/
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
 
+  this.stomach = [];
+}
+Person.prototype.greet = function() {
+  return `Hello! My name is ${this.name} and I am ${this.age} years old.`;
+}
+Person.prototype.eat = function(edible) {
+  this.stomach.push(edible);
+}
+Person.prototype.poop = function() {
+  this.stomach = [];
+}
+
+// I did my testing in the console! :)
+
+/*
   TASK 2
 
   - Build a Car constructor that takes model name and make.
@@ -55,7 +73,8 @@
   - A crashed car can't be driven any more. Attempts return a string "I crashed at x miles!", x being the miles in the odometer.
   - Give cars the ability to be repaired.
   - A repaired car can be driven again.
-
+*/
+/*
   TASK 3
 
   - Build a Baby constructor that subclasses the Person built earlier.
@@ -68,7 +87,6 @@
   Use your imagination and come up with constructors that allow to build objects
   With amazing and original capabilities. Build 3 small ones, or a very
   complicated one with lots of state. Surprise us!
-
 */
 
 /*
