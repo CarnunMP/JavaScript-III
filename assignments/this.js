@@ -16,17 +16,26 @@ const w = this; // Or:
 let f = function() {
     console.log(this);
 }
-// console.log(w);
-// f();
+console.log(w);
+f();
 
 // Principle 2
 
 // code example for Implicit Binding
+let obj = {
+    print: function() {
+        console.log(this);
+    }
+}
+obj.print();
 
 // Principle 3
 
 // code example for New Binding
+// ---> See 'tasks' in prototype.js
 
 // Principle 4
 
 // code example for Explicit Binding
+
+console.log("———");
