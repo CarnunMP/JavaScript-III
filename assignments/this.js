@@ -12,6 +12,12 @@
 // Principle 1
 
 // code example for Window Binding
+const w = this; // Or:
+let f = function() {
+    console.log(this);
+}
+// console.log(w);
+// f();
 
 // Principle 2
 
