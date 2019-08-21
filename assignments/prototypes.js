@@ -188,6 +188,8 @@ console.log(slime2);
 var bombBeetle1 = new BombBeetle(3, [110, 110], [15, 10]);
 console.log(bombBeetle1);
 
+console.log("———")
+
 /*
 
   STRETCH TASK
