@@ -37,5 +37,10 @@ obj.print();
 // Principle 4
 
 // code example for Explicit Binding
+let g = function() {
+    console.log(`'This' refers to ${this}.`);
+}
+g(); // 'This' refers to [object Window].
+g.call("dog"); // 'This' refers to dog.
 
 console.log("———");
