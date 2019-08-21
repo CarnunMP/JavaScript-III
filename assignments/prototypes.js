@@ -74,6 +74,25 @@ Person.prototype.poop = function() {
   - Give cars the ability to be repaired.
   - A repaired car can be driven again.
 */
+function Car(model, name, make) {
+  this.model = model;
+  this.name = name;
+  this.make = make;
+
+  this.odometer = 0;
+  this.functional = true;
+}
+Car.prototype.drive = function(distance){
+  if (!this.functional) { return `I crashed at ${this.odometer} miles!` }
+  this.odometer += distance;
+}
+Car.prototype.crash = function() {
+  this.functional = false;
+}
+Car.prototype.repair = function() {
+  this.functional = true;
+}
+
 /*
   TASK 3
 
@@ -81,7 +100,16 @@ Person.prototype.poop = function() {
   - Babies of course inherit the ability to greet, which can be strange.
   - Babies should have the ability to play, which persons don't.
   - By playing, a string is returned with some text of your choosing.
+*/
+function Baby(name, age) {
+  Person.call(this, name, age);
+}
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function() {
+  return `I'm better than you at this game, and I'm only ${this.age}...`
+}
 
+/*
   TASK 4
 
   Use your imagination and come up with constructors that allow to build objects
